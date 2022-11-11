@@ -11,3 +11,25 @@ output:
 
 My research question is how adult depression rate is correlated to education and income level in California. I will look at data from the California Behavioral Risk Factor Surveillance Survey that display the proportion of adults who were ever told they had a depressive disorder from 2012 to 2018.My hypothesis is that the higher a person's education and income level is, the more pressure he or she is faced with, and therefore the more likely to report depressive disorder.
 My explanatory variables are education level and income level. The former is divided into four categories: "No High School Diploma"(0), "High School Graduate or GED Certificate"(1), "Some College or Tech School"(2), and "College Graduate or Post Grad"(3), and the latter is divided into six categories:"< $20,000","$20,000 - $34,999", "$35,000 - $49,999", "$50,000 - $74,999", "$75,000 - $99,999" and "$100,000+". The outcome variable is the frequency of reported depressive disorder in each category. I will look at the correlation coefficient to see if my hypothesis is supported by empirical evidence. 
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+depression<-read_csv("depression.csv")
+depression_data<-depression|>
+  filter(Strata %in% c("Education"))|>
+  group_by(Year)|>
+  mutate(total_number=sum(Frequency),
+         depress_prop=Frequency/total_number,
+         Type_new=case_when(Type=="No High School Diploma"~0,
+                            Type=="High School Graduate or GED Certificate"~1,
+                            Type=="Some College or Tech School"~2,
+                            Type=="College Graduate or Post Grad"~3))
+plot1<-depression_data|>
+  ggplot(mapping=aes(x=Type_new,
+                     y=depress_prop))+
+  geom_col()+
+  facet_wrap(~Year, nrow = 1)
+plot1
+```
+
