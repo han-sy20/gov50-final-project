@@ -1,0 +1,162 @@
+Year,Strata,Type,Frequency
+2012,Total,Total,1920
+2012,Sex,Male,561
+2012,Sex,Female,1359
+2012,Race-Ethnicity,White,1314
+2012,Race-Ethnicity,Black,97
+2012,Race-Ethnicity,Hispanic,412
+2012,Race-Ethnicity,Asian/Pacific Islander,61
+2012,Race-Ethnicity,Other,36
+2012,Education,No High School Diploma,282
+2012,Education,High School Graduate or GED Certificate,337
+2012,Education,Some College or Tech School,563
+2012,Education,College Graduate or Post Grad,717
+2012,Income,"< $20,000",642
+2012,Income,"$20,000 - $34,999",295
+2012,Income,"$35,000 - $49,999",187
+2012,Income,"$50,000 - $74,999",250
+2012,Income,"$75,000 - $99,999",160
+2012,Income,"$100,000+",270
+2012,Age,18 to 34,219
+2012,Age,35 to 44,240
+2012,Age,45 to 54,409
+2012,Age,55 to 64,511
+2012,Age,65+ years,541
+2013,Total,Total,1689
+2013,Sex,Male,539
+2013,Sex,Female,1150
+2013,Race-Ethnicity,White,1103
+2013,Race-Ethnicity,Black,93
+2013,Race-Ethnicity,Hispanic,403
+2013,Race-Ethnicity,Asian/Pacific Islander,62
+2013,Race-Ethnicity,Other,28
+2013,Education,No High School Diploma,222
+2013,Education,High School Graduate or GED Certificate,361
+2013,Education,Some College or Tech School,504
+2013,Education,College Graduate or Post Grad,583
+2013,Income,"< $20,000",600
+2013,Income,"$20,000 - $34,999",283
+2013,Income,"$35,000 - $49,999",149
+2013,Income,"$50,000 - $74,999",186
+2013,Income,"$75,000 - $99,999",155
+2013,Income,"$100,000+",213
+2013,Age,18 to 34,241
+2013,Age,35 to 44,198
+2013,Age,45 to 54,347
+2013,Age,55 to 64,456
+2013,Age,65+ years,447
+2014,Total,Total,1309
+2014,Sex,Male,469
+2014,Sex,Female,840
+2014,Race-Ethnicity,White,832
+2014,Race-Ethnicity,Black,66
+2014,Race-Ethnicity,Hispanic,299
+2014,Race-Ethnicity,Asian/Pacific Islander,32
+2014,Race-Ethnicity,Other,72
+2014,Education,No High School Diploma,172
+2014,Education,High School Graduate or GED Certificate,209
+2014,Education,Some College or Tech School,365
+2014,Education,College Graduate or Post Grad,433
+2014,Income,"< $20,000",379
+2014,Income,"$20,000 - $34,999",177
+2014,Income,"$35,000 - $49,999",129
+2014,Income,"$50,000 - $74,999",107
+2014,Income,"$75,000 - $99,999",106
+2014,Income,"$100,000+",178
+2014,Age,18 to 34,225
+2014,Age,35 to 44,163
+2014,Age,45 to 54,255
+2014,Age,55 to 64,335
+2014,Age,65+ years,331
+2015,Total,Total,1848
+2015,Sex,Male,652
+2015,Sex,Female,1196
+2015,Race-Ethnicity,White,1143
+2015,Race-Ethnicity,Black,84
+2015,Race-Ethnicity,Hispanic,439
+2015,Race-Ethnicity,Asian/Pacific Islander,58
+2015,Race-Ethnicity,Other,106
+2015,Education,No High School Diploma,244
+2015,Education,High School Graduate or GED Certificate,328
+2015,Education,Some College or Tech School,556
+2015,Education,College Graduate or Post Grad,607
+2015,Income,"< $20,000",494
+2015,Income,"$20,000 - $34,999",258
+2015,Income,"$35,000 - $49,999",155
+2015,Income,"$50,000 - $74,999",197
+2015,Income,"$75,000 - $99,999",150
+2015,Income,"$100,000+",277
+2015,Age,18 to 34,372
+2015,Age,35 to 44,306
+2015,Age,45 to 54,321
+2015,Age,55 to 64,423
+2015,Age,65+ years,426
+2016,Total,Total,1645
+2016,Sex,Male,590
+2016,Sex,Female,1055
+2016,Race-Ethnicity,White,988
+2016,Race-Ethnicity,Black,91
+2016,Race-Ethnicity,Hispanic,404
+2016,Race-Ethnicity,Asian/Pacific Islander,53
+2016,Race-Ethnicity,Other,89
+2016,Education,No High School Diploma,208
+2016,Education,High School Graduate or GED Certificate,263
+2016,Education,Some College or Tech School,451
+2016,Education,College Graduate or Post Grad,550
+2016,Income,"< $20,000",396
+2016,Income,"$20,000 - $34,999",215
+2016,Income,"$35,000 - $49,999",137
+2016,Income,"$50,000 - $74,999",159
+2016,Income,"$75,000 - $99,999",120
+2016,Income,"$100,000+",263
+2016,Age,18 to 34,357
+2016,Age,35 to 44,203
+2016,Age,45 to 54,314
+2016,Age,55 to 64,390
+2016,Age,65+ years,381
+2017,Total,Total,1550
+2017,Sex,Male,525
+2017,Sex,Female,1025
+2017,Race-Ethnicity,White,903
+2017,Race-Ethnicity,Black,70
+2017,Race-Ethnicity,Hispanic,394
+2017,Race-Ethnicity,Asian/Pacific Islander,67
+2017,Race-Ethnicity,Other,110
+2017,Education,No High School Diploma,181
+2017,Education,High School Graduate or GED Certificate,265
+2017,Education,Some College or Tech School,483
+2017,Education,College Graduate or Post Grad,618
+2017,Income,"< $20,000",395
+2017,Income,"$20,000 - $34,999",188
+2017,Income,"$35,000 - $49,999",155
+2017,Income,"$50,000 - $74,999",192
+2017,Income,"$75,000 - $99,999",147
+2017,Income,"$100,000+",296
+2017,Age,18 to 34,304
+2017,Age,35 to 44,209
+2017,Age,45 to 54,268
+2017,Age,55 to 64,382
+2017,Age,65+ years,387
+2018,Total,Total,1964
+2018,Sex,Male,758
+2018,Sex,Female,1206
+2018,Race-Ethnicity,White,1053
+2018,Race-Ethnicity,Black,107
+2018,Race-Ethnicity,Hispanic,606
+2018,Race-Ethnicity,Asian/Pacific Islander,73
+2018,Race-Ethnicity,Other,118
+2018,Education,No High School Diploma,241
+2018,Education,High School Graduate or GED Certificate,337
+2018,Education,Some College or Tech School,543
+2018,Education,College Graduate or Post Grad,660
+2018,Income,"< $20,000",471
+2018,Income,"$20,000 - $34,999",262
+2018,Income,"$35,000 - $49,999",192
+2018,Income,"$50,000 - $74,999",205
+2018,Income,"$75,000 - $99,999",323
+2018,Income,"$100,000+",157
+2018,Age,18 to 34,496
+2018,Age,35 to 44,285
+2018,Age,45 to 54,301
+2018,Age,55 to 64,432
+2018,Age,65+ years,450

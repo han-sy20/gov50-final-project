@@ -31,5 +31,12 @@ plot1<-depression_data|>
   geom_col()+
   facet_wrap(~Year, nrow = 1)
 plot1
+
+tibble<-depression_data|>
+  group_by(Type_new)|>
+  summarize(mean=mean(depress_prop))
+knitr::kable(tibble, col.names = c("Education Level","Depression Prop"))
+
 ```
 
+The depression rate and the education is positively correlated. This is consistent with my hypothesis that the higher a person's education level is, the more pressure he or she is faced with, and therefore the more likely to report depressive disorder.
