@@ -1,42 +1,65 @@
 ---
-title: "Gov 50 Final Project"
+title: "Sorting Hogwarts Hat with Multiple Regression for Harry Potter characters"
 author: Shuyuan Han
-description: "My final project"
+description: "My final project for Gov 50"
 output:
-  distill::distill_article:
+  distill::distill_article: 
     self_contained: false
 ---
 
-## Project thoughts
-
-My research question is how adult depression rate is correlated to education and income level in California. I will look at data from the California Behavioral Risk Factor Surveillance Survey that display the proportion of adults who were ever told they had a depressive disorder from 2012 to 2018.My hypothesis is that the higher a person's education and income level is, the more pressure he or she is faced with, and therefore the more likely to report depressive disorder.
-My explanatory variables are education level and income level. The former is divided into four categories: "No High School Diploma"(0), "High School Graduate or GED Certificate"(1), "Some College or Tech School"(2), and "College Graduate or Post Grad"(3), and the latter is divided into six categories:"< $20,000","$20,000 - $34,999", "$35,000 - $49,999", "$50,000 - $74,999", "$75,000 - $99,999" and "$100,000+". The outcome variable is the frequency of reported depressive disorder in each category. I will look at the correlation coefficient to see if my hypothesis is supported by empirical evidence. 
+## Research question
+As a big fan of the Harry Potter series, I am always wondering how the Sorting Hat actually works. Are the first years randomly assigned to one of the four houses or is there a determined classification algorithm behind? What are the attributes of students in each of the four houses? To find out the science behind the magic, it is a great idea to look at the information of the students (the data, input) and which house they were assigned to (the label, target). In this project, I tried to implement a Sorting Hogwarts Hat with Multiple Regression on R for 1,600 Harry Potter characters based on their personal information.
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
-depression<-read_csv("depression.csv")
-depression_data<-depression|>
-  filter(Strata %in% c("Education"))|>
-  group_by(Year)|>
-  mutate(total_number=sum(Frequency),
-         depress_prop=Frequency/total_number,
-         Type_new=case_when(Type=="No High School Diploma"~0,
-                            Type=="High School Graduate or GED Certificate"~1,
-                            Type=="Some College or Tech School"~2,
-                            Type=="College Graduate or Post Grad"~3))
-plot1<-depression_data|>
-  ggplot(mapping=aes(x=Type_new,
-                     y=depress_prop))+
-  geom_col()+
-  facet_wrap(~Year, nrow = 1)
-plot1
+library(infer)
+data_students<-read_csv("data.csv")
+data_students
+```
 
-tibble<-depression_data|>
-  group_by(Type_new)|>
-  summarize(mean=mean(depress_prop))
-knitr::kable(tibble, col.names = c("Education Level","Depression Prop"))
+## Data
+
+The independent variables in this data set will be Best Hand, Arithmancy, Astronomy, Herbology, Defense Against the Dark Arts, Divination, Muggle Studies, Ancient Runes, History of Magic, Transfiguration, Potions, Care of Magical Creatures, Charms, Flying, and the dependent variable, of course, will be Hogwarts House.However, we don't need to look at all the independent variables. It is important to see what variables are useful to group people by. There is no use to use all features as some of them don’t provide an obvious division into groups and can bring only noise. 
+
+```{r}
+data_students<-data_students|>
+  mutate(Best_hand_Left=ifelse(`Best Hand`=="Left",1,0),
+         House_code=case_when(`Hogwarts House`=="Gryffindor"~1,
+                              `Hogwarts House`=="Slytherin"~2,
+                              `Hogwarts House`=="Ravenclaw"~3,
+                              `Hogwarts House`=="Hufflepuff"~4))
+cor1<-cor(data_students$House_code,data_students$Best_hand_Left, use = "pairwise")
+cor2<-cor(data_students$House_code,data_students$Arithmancy, use = "pairwise")
+cor3<-cor(data_students$House_code,data_students$Astronomy, use = "pairwise")
+cor4<-cor(data_students$House_code,data_students$Herbology, use = "pairwise")
+cor5<-cor(data_students$House_code,data_students$`Defense Against the Dark Arts`, use = "pairwise")
+cor6<-cor(data_students$House_code,data_students$Divination, use = "pairwise")
+cor7<-cor(data_students$House_code,data_students$`Muggle Studies`, use = "pairwise")
+cor8<-cor(data_students$House_code,data_students$`Ancient Runes`, use = "pairwise")
+cor9<-cor(data_students$House_code,data_students$`History of Magic`, use = "pairwise")
+cor10<-cor(data_students$House_code,data_students$Transfiguration, use = "pairwise")
+cor11<-cor(data_students$House_code,data_students$Potions, use = "pairwise")
+cor12<-cor(data_students$House_code,data_students$`Care of Magical Creatures`, use = "pairwise")
+cor13<-cor(data_students$House_code,data_students$Charms, use = "pairwise")
+cor14<-cor(data_students$House_code,data_students$Flying, use = "pairwise")
+tibble(independent_variable=c("Best Hand","Arithmancy","Astronomy","Herbology","Defense Against the Dark Arts",	"Divination", "Muggle Studies",	"Ancient Runes","History of Magic",	"Transfiguration","Potions","Care of Magical Creatures", "Charms","Flying"), cor=c(cor1,cor2,cor3,cor4,cor5,cor6,cor7,cor8,cor9,cor10,cor11,cor12,cor13,cor14))
+
 
 ```
 
-The depression rate and the education is positively correlated. This is consistent with my hypothesis that the higher a person's education level is, the more pressure he or she is faced with, and therefore the more likely to report depressive disorder.
+From the tibble we narrow our related independent variables to Herbology, History of Magic, Transfiguration, Charms, and Flying. 
+ 
+```{r}
+data_students<-data_students|>
+  rename(History=`History of Magic`)
+regression_data<-lm(House_code~Herbology+History+Transfiguration+Charms+Flying,data = data_students)
+regression_data
+modelsummary::modelsummary(regression_data,
+statistic = c("s.e. = {std.error}",
+"p = {p.value}"),
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+
