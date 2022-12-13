@@ -1585,16 +1585,16 @@ Null Hypothesis: independence
 # A tibble: 1,000 × 2
    replicate     stat
        &lt;int&gt;    &lt;dbl&gt;
- 1         1 -0.00875
- 2         2 -0.0738 
- 3         3  0.134  
- 4         4  0.0288 
- 5         5  0.0688 
- 6         6  0.0263 
- 7         7 -0.0113 
- 8         8 -0.0688 
- 9         9  0.00875
-10        10 -0.0213 
+ 1         1 -0.0263 
+ 2         2  0.0488 
+ 3         3  0.0138 
+ 4         4  0.0163 
+ 5         5  0.0113 
+ 6         6 -0.0188 
+ 7         7 -0.0238 
+ 8         8 -0.00875
+ 9         9  0.0813 
+10        10  0.0513 
 # … with 990 more rows</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>base_p</span><span class='op'>&lt;-</span><span class='va'>null_diff</span><span class='op'>|&gt;</span></span>
@@ -1604,7 +1604,7 @@ Null Hypothesis: independence
 <pre><code># A tibble: 1 × 1
   p_value
     &lt;dbl&gt;
-1   0.976</code></pre>
+1   0.982</code></pre>
 </div>
 <p>Since the p value is far higher than 0.05 (in fact close to 1), we can retain the null hypothesis. That is, Best Hand does not have a say at all on the house that students were assigned.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1896,7 +1896,7 @@ R2 Adj.
 </div>
 <p>Holding other variables constant, a one unit change in the independent variable Herbology would result in a change of negative 0.145 in the House_code (negative correlation), a one unit change in Divination would result in a change of negative 0.014 in the House_code (negative correlation), a one unit change in Defense Against the Dark Arts would result in a change of 0.1 in the House_code (positive correlation), and a one unit change in Charms would result in a change of negative 0.015 in the House_code (negative correlation).An estimated coefficient is statistically significant when its p value is less than alpha. Therefore, at the 0.05 level, Herbology, Defense against the Dark Arts, and Charms are all statistically significant, but Divination is not.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>According to the discussion above, the birth month of a student and his or her best hand have barely nothing to do with the Sorting Hat’s decision. As for performance in each of the main courses, a student’s performance in Herbology and Divination are both negatively correlated with the overall “excellency” of the house he or she is assigned to, and a student’s performance in Defense Against the Dark Arts is positively correlated with the overall “excellency” of the house he or she is assigned to. This makes sense in that Defense Against the Dark Arts is assumed to be the most important skill in a world where Dark Art threatens the lives of almost everyone. An excellent wizard should be well equipped with knowledge in this field. Herbology and Divination, however, may make students a good scholar in academia, but not necessarily an excellent wizard. This study, however, only looks at the birth month, best hand, and performance in main courses. There might be many other variables that affect the Sorting Hat’s decision. Further study is therefore needed to take a step forward.</p>
+<p>According to the discussion above, the birth month of a student and his or her best hand have barely nothing to do with the Sorting Hat’s decision. As for performance in each of the main courses, a student’s performance in Herbology and Divination are both negatively correlated with the overall “excellency” of the house he or she is assigned to, and a student’s performance in Defense Against the Dark Arts is positively correlated with the overall “excellency” of the house he or she is assigned to. And these are statistically significant. This makes sense in that Defense Against the Dark Arts is assumed to be the most important skill in a world where Dark Art threatens the lives of almost everyone. An excellent wizard should be well equipped with knowledge in this field. Herbology and Divination, however, may make students a good scholar in academia, but not necessarily an excellent wizard. This study, however, only looks at the birth month, best hand, and performance in main courses. There might be many other variables that affect the Sorting Hat’s decision, for example, the students’ family background. Further study is therefore needed to take a step forward.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
