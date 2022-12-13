@@ -1583,18 +1583,18 @@ Explanatory: Best Hand (factor)
 Explanatory: Best Hand (factor)
 Null Hypothesis: independence
 # A tibble: 1,000 × 2
-   replicate     stat
-       &lt;int&gt;    &lt;dbl&gt;
- 1         1 -0.0263 
- 2         2  0.0488 
- 3         3  0.0138 
- 4         4  0.0163 
- 5         5  0.0113 
- 6         6 -0.0188 
- 7         7 -0.0238 
- 8         8 -0.00875
- 9         9  0.0813 
-10        10  0.0513 
+   replicate    stat
+       &lt;int&gt;   &lt;dbl&gt;
+ 1         1  0.0663
+ 2         2 -0.0413
+ 3         3 -0.0313
+ 4         4 -0.0163
+ 5         5 -0.0488
+ 6         6  0.0313
+ 7         7  0.0813
+ 8         8 -0.0788
+ 9         9  0.0413
+10        10  0.101 
 # … with 990 more rows</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>base_p</span><span class='op'>&lt;-</span><span class='va'>null_diff</span><span class='op'>|&gt;</span></span>
@@ -1604,7 +1604,7 @@ Null Hypothesis: independence
 <pre><code># A tibble: 1 × 1
   p_value
     &lt;dbl&gt;
-1   0.982</code></pre>
+1   0.998</code></pre>
 </div>
 <p>Since the p value is far higher than 0.05 (in fact close to 1), we can retain the null hypothesis. That is, Best Hand does not have a say at all on the house that students were assigned.</p>
 <div class="layout-chunk" data-layout="l-body">
