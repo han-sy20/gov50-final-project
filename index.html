@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data.csv","data_Harry.xls","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/header-attrs-2.16/header-attrs.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.18/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data.csv","data_Harry.xls","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.16/header-attrs.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.18/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1550,68 +1550,196 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 #   and abbreviated variable names ¹​`Hogwarts House`, ²​`First Name`,
 #   ³​`Last Name`, ⁴​Birthday, ⁵​`Best Hand`, ⁶​Arithmancy, ⁷​Astronomy</code></pre>
 </div>
-<h2 id="data">Data</h2>
-<p>The independent variables in this data set will be Best Hand, Arithmancy, Astronomy, Herbology, Defense Against the Dark Arts, Divination, Muggle Studies, Ancient Runes, History of Magic, Transfiguration, Potions, Care of Magical Creatures, Charms, Flying, and the dependent variable, of course, will be Hogwarts House.However, we don’t need to look at all the independent variables. It is important to see what variables are useful to group people by. There is no use to use all features as some of them don’t provide an obvious division into groups and can bring only noise.</p>
+<p>The independent variables in this data set will be Birth month, Best Hand, Arithmancy, Astronomy, Herbology, Defense Against the Dark Arts, Divination, Muggle Studies, Ancient Runes, History of Magic, Transfiguration, Potions, Care of Magical Creatures, Charms, Flying, and the dependent variable, of course, will be Hogwarts House. I used a mutate function here to change the categorical variable, Hogwarts House, to a numerical one based on their performances in the HOUSE CUP competition. With Slytherin ranking first, Gryffindor second, Ravenclaw third, and Hufflepuff last, I assigned 4 to Slytherin, 3 to Gryffindor, 2 to Ravenclaw, and 1 to Hufflepuff as an indicator of overall “excellency”. This study looks at how independent variables, such as birth month, best hand, and performance in each subject affect a student’s house assignment. Put it in another way, do these personal traits affect the Sorting Hat’s decision to assign a student to different houses in terms of overall “excellency”?</p>
+<h2 id="does-best-hand-have-a-say">Does Best Hand Have a Say?</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_students</span><span class='op'>&lt;-</span><span class='va'>data_students</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Best_hand_Left<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>`Best Hand`</span><span class='op'>==</span><span class='st'>"Left"</span>,<span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>,</span>
-<span>         House_code<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Gryffindor"</span><span class='op'>~</span><span class='fl'>1</span>,</span>
-<span>                              <span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Slytherin"</span><span class='op'>~</span><span class='fl'>2</span>,</span>
-<span>                              <span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Ravenclaw"</span><span class='op'>~</span><span class='fl'>3</span>,</span>
-<span>                              <span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Hufflepuff"</span><span class='op'>~</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>cor1</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Best_hand_Left</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor2</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Arithmancy</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor3</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Astronomy</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor4</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Herbology</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor5</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Defense Against the Dark Arts`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor6</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Divination</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor7</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Muggle Studies`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor8</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Ancient Runes`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor9</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`History of Magic`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor10</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Transfiguration</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor11</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Potions</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor12</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Care of Magical Creatures`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor13</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Charms</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='va'>cor14</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Flying</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>independent_variable<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Best Hand"</span>,<span class='st'>"Arithmancy"</span>,<span class='st'>"Astronomy"</span>,<span class='st'>"Herbology"</span>,<span class='st'>"Defense Against the Dark Arts"</span>,  <span class='st'>"Divination"</span>, <span class='st'>"Muggle Studies"</span>,  <span class='st'>"Ancient Runes"</span>,<span class='st'>"History of Magic"</span>,  <span class='st'>"Transfiguration"</span>,<span class='st'>"Potions"</span>,<span class='st'>"Care of Magical Creatures"</span>, <span class='st'>"Charms"</span>,<span class='st'>"Flying"</span><span class='op'>)</span>, cor<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>cor1</span>,<span class='va'>cor2</span>,<span class='va'>cor3</span>,<span class='va'>cor4</span>,<span class='va'>cor5</span>,<span class='va'>cor6</span>,<span class='va'>cor7</span>,<span class='va'>cor8</span>,<span class='va'>cor9</span>,<span class='va'>cor10</span>,<span class='va'>cor11</span>,<span class='va'>cor12</span>,<span class='va'>cor13</span>,<span class='va'>cor14</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>House_code<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Hufflepuff"</span><span class='op'>~</span><span class='fl'>1</span>,</span>
+<span>                              <span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Ravenclaw"</span><span class='op'>~</span><span class='fl'>2</span>,</span>
+<span>                              <span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Gryffindor"</span><span class='op'>~</span><span class='fl'>3</span>,</span>
+<span>                              <span class='va'>`Hogwarts House`</span><span class='op'>==</span><span class='st'>"Slytherin"</span><span class='op'>~</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>base_diff</span><span class='op'>&lt;-</span><span class='va'>data_students</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/specify.html'>specify</a></span><span class='op'>(</span><span class='va'>House_code</span><span class='op'>~</span><span class='va'>`Best Hand`</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/calculate.html'>calculate</a></span><span class='op'>(</span>stat<span class='op'>=</span><span class='st'>"diff in means"</span>, order<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Left"</span>,<span class='st'>"Right"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>base_diff</span></span></code></pre>
 </div>
-<pre><code># A tibble: 14 × 2
-   independent_variable               cor
-   &lt;chr&gt;                            &lt;dbl&gt;
- 1 Best Hand                     -0.00963
- 2 Arithmancy                     0.0246 
- 3 Astronomy                      0.110  
- 4 Herbology                      0.815  
- 5 Defense Against the Dark Arts -0.112  
- 6 Divination                     0.296  
- 7 Muggle Studies                 0.126  
- 8 Ancient Runes                 -0.463  
- 9 History of Magic               0.700  
-10 Transfiguration                0.699  
-11 Potions                        0.0722 
-12 Care of Magical Creatures      0.0457 
-13 Charms                         0.473  
-14 Flying                        -0.551  </code></pre>
+<pre><code>Response: House_code (numeric)
+Explanatory: Best Hand (factor)
+# A tibble: 1 × 1
+      stat
+     &lt;dbl&gt;
+1 -0.00125</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>null_diff</span><span class='op'>&lt;-</span><span class='va'>data_students</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/specify.html'>specify</a></span><span class='op'>(</span><span class='va'>House_code</span><span class='op'>~</span><span class='va'>`Best Hand`</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/hypothesize.html'>hypothesize</a></span><span class='op'>(</span>null<span class='op'>=</span><span class='st'>"independence"</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/generate.html'>generate</a></span><span class='op'>(</span>reps<span class='op'>=</span><span class='fl'>1000</span>, type<span class='op'>=</span><span class='st'>"permute"</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/calculate.html'>calculate</a></span><span class='op'>(</span>stat<span class='op'>=</span><span class='st'>"diff in means"</span>, order<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Left"</span>,<span class='st'>"Right"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>null_diff</span></span></code></pre>
 </div>
-<p>From the tibble we narrow our related independent variables to Herbology, History of Magic, Transfiguration, Charms, and Flying.</p>
+<pre><code>Response: House_code (numeric)
+Explanatory: Best Hand (factor)
+Null Hypothesis: independence
+# A tibble: 1,000 × 2
+   replicate     stat
+       &lt;int&gt;    &lt;dbl&gt;
+ 1         1 -0.00875
+ 2         2 -0.0738 
+ 3         3  0.134  
+ 4         4  0.0288 
+ 5         5  0.0688 
+ 6         6  0.0263 
+ 7         7 -0.0113 
+ 8         8 -0.0688 
+ 9         9  0.00875
+10        10 -0.0213 
+# … with 990 more rows</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>base_p</span><span class='op'>&lt;-</span><span class='va'>null_diff</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/get_p_value.html'>get_p_value</a></span><span class='op'>(</span>obs_stat <span class='op'>=</span> <span class='va'>base_diff</span>, direction <span class='op'>=</span> <span class='st'>"both"</span><span class='op'>)</span></span>
+<span><span class='va'>base_p</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.976</code></pre>
+</div>
+<p>Since the p value is far higher than 0.05 (in fact close to 1), we can retain the null hypothesis. That is, Best Hand does not have a say at all on the house that students were assigned.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_students</span><span class='op'>&lt;-</span><span class='va'>data_students</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>History<span class='op'>=</span><span class='va'>`History of Magic`</span><span class='op'>)</span></span>
-<span><span class='va'>regression_data</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>House_code</span><span class='op'>~</span><span class='va'>Herbology</span><span class='op'>+</span><span class='va'>History</span><span class='op'>+</span><span class='va'>Transfiguration</span><span class='op'>+</span><span class='va'>Charms</span><span class='op'>+</span><span class='va'>Flying</span>,data <span class='op'>=</span> <span class='va'>data_students</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>null_diff</span><span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/visualize.html'>visualize</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/shade_p_value.html'>shade_p_value</a></span><span class='op'>(</span>obs_stat <span class='op'>=</span> <span class='va'>base_diff</span>, direction <span class='op'>=</span> <span class='st'>"both"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<h2 id="does-birth-month-have-a-say">Does Birth Month have a say?</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span></span>
+<span><span class='va'>birthmonth</span><span class='op'>&lt;-</span><span class='fu'><a href='https://lubridate.tidyverse.org/reference/month.html'>month</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>Birthday</span>, format<span class='op'>=</span><span class='st'>"%Y/%m/%d"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>data_students</span><span class='op'>&lt;-</span><span class='va'>data_students</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Birthmonth<span class='op'>=</span><span class='va'>birthmonth</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>data_students</span>, mapping<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>Birthmonth</span>, fill<span class='op'>=</span><span class='va'>`Hogwarts House`</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"Birth Month"</span>,</span>
+<span>       y<span class='op'>=</span><span class='st'>"Number of Students"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<p>From the graph above, we see no evidence of one’s birth month deciding his or her House assignment.For each house, students are basically evenly distributed into the 12 months.</p>
+<h2 id="how-is-course-performance-related-to-house-assignment">How is Course performance related to House assignment?</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>cor1</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Arithmancy</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor2</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Astronomy</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor3</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Herbology</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor4</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Defense Against the Dark Arts`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor5</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Divination</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor6</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Muggle Studies`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor7</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Ancient Runes`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor8</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`History of Magic`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor9</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Transfiguration</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor10</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Potions</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor11</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>`Care of Magical Creatures`</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor12</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Charms</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>cor13</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data_students</span><span class='op'>$</span><span class='va'>House_code</span>,<span class='va'>data_students</span><span class='op'>$</span><span class='va'>Flying</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span><span class='va'>tibble1</span><span class='op'>&lt;-</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>independent_variable<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Arithmancy"</span>,<span class='st'>"Astronomy"</span>,<span class='st'>"Herbology"</span>,<span class='st'>"Defense Against the Dark Arts"</span>,  <span class='st'>"Divination"</span>, <span class='st'>"Muggle Studies"</span>,  <span class='st'>"Ancient Runes"</span>,<span class='st'>"History of Magic"</span>,  <span class='st'>"Transfiguration"</span>,<span class='st'>"Potions"</span>,<span class='st'>"Care of Magical Creatures"</span>, <span class='st'>"Charms"</span>,<span class='st'>"Flying"</span><span class='op'>)</span>, cor<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>cor1</span>,<span class='va'>cor2</span>,<span class='va'>cor3</span>,<span class='va'>cor4</span>,<span class='va'>cor5</span>,<span class='va'>cor6</span>,<span class='va'>cor7</span>,<span class='va'>cor8</span>,<span class='va'>cor9</span>,<span class='va'>cor10</span>,<span class='va'>cor11</span>,<span class='va'>cor12</span>,<span class='va'>cor13</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span> <span class='op'>(</span><span class='va'>tibble1</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">independent_variable</th>
+<th style="text-align: right;">cor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Arithmancy</td>
+<td style="text-align: right;">-0.0220039</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Astronomy</td>
+<td style="text-align: right;">-0.4496601</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Herbology</td>
+<td style="text-align: right;">-0.8115272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Defense Against the Dark Arts</td>
+<td style="text-align: right;">0.4502967</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Divination</td>
+<td style="text-align: right;">-0.7036393</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Muggle Studies</td>
+<td style="text-align: right;">-0.1125246</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ancient Runes</td>
+<td style="text-align: right;">0.1451203</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">History of Magic</td>
+<td style="text-align: right;">-0.3092656</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Transfiguration</td>
+<td style="text-align: right;">-0.2977851</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Potions</td>
+<td style="text-align: right;">0.2945289</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Care of Magical Creatures</td>
+<td style="text-align: right;">-0.0360265</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Charms</td>
+<td style="text-align: right;">-0.4044172</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Flying</td>
+<td style="text-align: right;">0.0835603</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggobi.github.io/ggally/'>GGally</a></span><span class='op'>)</span></span>
+<span><span class='fu'>GGally</span><span class='fu'>::</span><span class='fu'><a href='https://ggobi.github.io/ggally/reference/ggcorr.html'>ggcorr</a></span><span class='op'>(</span><span class='va'>data_students</span>,</span>
+<span>               methods<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"everything"</span>,<span class='st'>"pearson"</span><span class='op'>)</span>,</span>
+<span>               label <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span>               label_alpha <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<p>To build a multiple regression model,we don’t need to use all the course variables. It is important to see what variables are useful to group people by. There is no use to use all features as some of them don’t provide an obvious division into groups and can bring only noise. From the table above we can narrow our related independent variables to Herbology, Divination, Defense against the Dark Arts, and Charms.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='va'>data_students</span><span class='op'>&lt;-</span><span class='va'>data_students</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>Dark<span class='op'>=</span> <span class='va'>`Defense Against the Dark Arts`</span><span class='op'>)</span></span>
+<span><span class='va'>regression_data</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>House_code</span><span class='op'>~</span><span class='va'>Dark</span><span class='op'>+</span><span class='va'>Herbology</span><span class='op'>+</span><span class='va'>Divination</span><span class='op'>+</span><span class='va'>Charms</span>,data <span class='op'>=</span> <span class='va'>data_students</span><span class='op'>)</span></span>
 <span><span class='va'>regression_data</span></span></code></pre>
 </div>
 <pre><code>
 Call:
-lm(formula = House_code ~ Herbology + History + Transfiguration + 
-    Charms + Flying, data = data_students)
+lm(formula = House_code ~ Dark + Herbology + Divination + Charms, 
+    data = data_students)
 
 Coefficients:
-    (Intercept)        Herbology          History  Transfiguration  
-     -1.734e+01        1.985e-01        7.789e-02        4.169e-03  
-         Charms           Flying  
-     -6.301e-02       -6.947e-04  </code></pre>
+(Intercept)         Dark    Herbology   Divination       Charms  
+   -1.11740      0.09959     -0.14531     -0.01408     -0.01486  </code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://vincentarelbundock.github.io/modelsummary/reference/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>regression_data</span>,</span>
 <span>statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
@@ -1634,14 +1762,36 @@ Model 1
 (Intercept)
 </td>
 <td style="text-align:center;">
--17.341
+-1.117
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.836
+s.e. = 1.632
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.494
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dark
+</td>
+<td style="text-align:center;">
+0.100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.009
 </td>
 </tr>
 <tr>
@@ -1656,14 +1806,14 @@ p = &lt;0.001
 Herbology
 </td>
 <td style="text-align:center;">
-0.198
+-0.145
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.004
+s.e. = 0.006
 </td>
 </tr>
 <tr>
@@ -1675,10 +1825,32 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-History
+Divination
 </td>
 <td style="text-align:center;">
-0.078
+-0.014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.075
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Charms
+</td>
+<td style="text-align:center;">
+-0.015
 </td>
 </tr>
 <tr>
@@ -1689,76 +1861,10 @@ s.e. = 0.007
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-p = &lt;0.001
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transfiguration
-</td>
-<td style="text-align:center;">
-0.004
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-s.e. = 0.0006
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-p = &lt;0.001
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Charms
-</td>
-<td style="text-align:center;">
--0.063
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-s.e. = 0.002
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-p = &lt;0.001
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Flying
-</td>
-<td style="text-align:center;">
--0.0007
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-s.e. = 0.0004
-</td>
-</tr>
-<tr>
 <td style="text-align:left;box-shadow: 0px 1px">
 </td>
 <td style="text-align:center;box-shadow: 0px 1px">
-p = 0.064
+p = 0.025
 </td>
 </tr>
 <tr>
@@ -1766,7 +1872,7 @@ p = 0.064
 Num.Obs.
 </td>
 <td style="text-align:center;">
-1490
+1501
 </td>
 </tr>
 <tr>
@@ -1774,7 +1880,7 @@ Num.Obs.
 R2
 </td>
 <td style="text-align:center;">
-0.880
+0.855
 </td>
 </tr>
 <tr>
@@ -1782,13 +1888,16 @@ R2
 R2 Adj.
 </td>
 <td style="text-align:center;">
-0.880
+0.854
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Holding other variables constant, a one unit change in the independent variable Herbology would result in a change of negative 0.145 in the House_code (negative correlation), a one unit change in Divination would result in a change of negative 0.014 in the House_code (negative correlation), a one unit change in Defense Against the Dark Arts would result in a change of 0.1 in the House_code (positive correlation), and a one unit change in Charms would result in a change of negative 0.015 in the House_code (negative correlation).An estimated coefficient is statistically significant when its p value is less than alpha. Therefore, at the 0.05 level, Herbology, Defense against the Dark Arts, and Charms are all statistically significant, but Divination is not.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>According to the discussion above, the birth month of a student and his or her best hand have barely nothing to do with the Sorting Hat’s decision. As for performance in each of the main courses, a student’s performance in Herbology and Divination are both negatively correlated with the overall “excellency” of the house he or she is assigned to, and a student’s performance in Defense Against the Dark Arts is positively correlated with the overall “excellency” of the house he or she is assigned to. This makes sense in that Defense Against the Dark Arts is assumed to be the most important skill in a world where Dark Art threatens the lives of almost everyone. An excellent wizard should be well equipped with knowledge in this field. Herbology and Divination, however, may make students a good scholar in academia, but not necessarily an excellent wizard. This study, however, only looks at the birth month, best hand, and performance in main courses. There might be many other variables that affect the Sorting Hat’s decision. Further study is therefore needed to take a step forward.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
